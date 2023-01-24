@@ -16,7 +16,7 @@ app.post('/register',async (req, res)=>{
         let user = new User(req.body);
         if(user){
             let result = await user.save();
-            console.log(result)
+            // console.log(result)
             res.send({result,message:"Account Creating..."}) 
         }
         else{
@@ -31,7 +31,7 @@ app.post('/register',async (req, res)=>{
 
 app.post('/login',async (req, res)=>{
     try{
-        console.log(req.body)
+        // console.log(req.body)
         if(req.body.email && req.body.password){
             let user = await User.findOne(req.body).catch(err => {throw err})
             if(user){
@@ -61,7 +61,7 @@ app.get('/notes/:id/:filter',async (req,res) => {
     let id = req.params.id;
     let filter = req.params.filter;
     // let search = req.params.search;
-    console.log(filter)
+    // console.log(filter)
     let notes;
     if(filter === 'all'){
         notes = await Notes.find({userId:id});
@@ -111,7 +111,7 @@ app.get('/count/:id', async (req, res) => {
     Work = Work.length
     Study = Study.length
 
-    console.log({all,Video,Wishlist,Assignment,Projects,Work,Study})
+    // console.log({all,Video,Wishlist,Assignment,Projects,Work,Study})
     res.send({all,Video,Wishlist,Assignment,Projects,Work,Study})
 })
 
