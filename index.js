@@ -13,11 +13,16 @@ const PORT = process.env.PORT || 4000
 
 app.post('/register',async (req, res)=>{
     try{
+        let exist = await User.find({email: req.body.email})
+        if(exist.length > 0){
+            return res.send({message: "User already registered..."})
+        }
         let user = new User(req.body);
         if(user){
             let result = await user.save();
             // console.log(result)
             res.send({result,message:"Account Creating..."}) 
+            
         }
         else{
             res.status(404).send({message: "Error"})
